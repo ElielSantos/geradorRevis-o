@@ -1,4 +1,123 @@
- document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronograma de Revisão</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            color: #333;
+        }
+
+        input, button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            color: #333;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 14px;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cronograma de Revisão</h1>
+        <form id="cadastroForm">
+            <label for="data">Data:</label>
+            <input type="date" id="data" required>
+            
+            <label for="topico">Tópico:</label>
+            <input type="text" id="topico" required>
+            
+            <button type="submit">Cadastrar</button>
+        </form>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Tópico</th>
+                    <th>Revisão em 5 dias</th>
+                    <th>Revisão em 14 dias</th>
+                    <th>Revisão em 30 dias</th>
+                    <th>Revisão em 60 dias</th>
+                </tr>
+            </thead>
+            <tbody id="cronogramaTableBody">
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.getElementById('cadastroForm').addEventListener('submit', function(event) {
             event.preventDefault();
             
             const data = document.getElementById('data').value;
@@ -36,3 +155,6 @@
             const mes = String(data.getMonth() + 1).padStart(2, '0'); // Meses começam do zero
             return `${dia}/${mes}`;
         }
+    </script>
+</body>
+</html>
