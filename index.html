@@ -1,0 +1,38 @@
+ document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const data = document.getElementById('data').value;
+            const topico = document.getElementById('topico').value;
+            
+            if (data && topico) {
+                const dataRevisao5 = calcularDataRevisao(data, 5);
+                const dataRevisao14 = calcularDataRevisao(data, 14);
+                const dataRevisao30 = calcularDataRevisao(data, 30);
+                const dataRevisao60 = calcularDataRevisao(data, 60);
+
+                const tabelaBody = document.getElementById('cronogramaTableBody');
+                const novaLinha = document.createElement('tr');
+
+                novaLinha.innerHTML = `
+                    <td>${topico}</td>
+                    <td>${dataRevisao5}</td>
+                    <td>${dataRevisao14}</td>
+                    <td>${dataRevisao30}</td>
+                    <td>${dataRevisao60}</td>
+                `;
+
+                tabelaBody.appendChild(novaLinha);
+            }
+        });
+
+        function calcularDataRevisao(dataInicial, dias) {
+            const data = new Date(dataInicial);
+            data.setDate(data.getDate() + dias);
+            return formatarData(data);
+        }
+
+        function formatarData(data) {
+            const dia = String(data.getDate()).padStart(2, '0');
+            const mes = String(data.getMonth() + 1).padStart(2, '0'); // Meses começam do zero
+            return `${dia}/${mes}`;
+        }
